@@ -39,7 +39,7 @@ let isFirstGate = true;
 let isSetting = true;
 let listening = true;
 let pauseSetting = false;
-const lanIP = `${window.location.hostname}:3000`;
+const lanIP = `${window.location.hostname}:8000`;
 console.log(lanIP);
 const socket = io(lanIP);
 var client = mqtt.connect('ws://13.81.105.139'); // you add a ws:// url here
