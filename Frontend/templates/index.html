@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BikeBattle - LEDs the battle begin!</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Open+Sans&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../style/css/normalize.css">
+    <link rel="stylesheet" href="../style/css/screen.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
+
+    <!-- <link rel="apple-touch-icon" sizes="180x180" href="./img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="./img/favicon/site.webmanifest"> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"
+        integrity="sha256-bQmrZe4yPnQrLTY+1gYylfNMBuGfnT/HKsCGX+9Xuqo=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <script src="../script/noSleep.js"></script>
+    <script src="../script/browserMqtt.js"></script>
+    <script src="../script/moment.js"></script>
+    <script src="../script/app.js"></script>
+</head>
+
+<body class="js-index">
+    <script>
+        var user = JSON.parse('{{ userinfo | tojson | safe}}');
+    </script>
+    <div class="o-container">
+        <div class="c-app">
+            <div class="c-header">
+                <div class="c-user-profile" style="background:url('')center center no-repeat;">
+
+                </div>
+                <h1 class="c-logo">
+                    <span class="c-logo__accent"><i class="fa fa-biking c-logo__icon"></i>Bike</span></i><span
+                        class="c-logo__alpha"></i>Battle</span>
+                </h1>
+            </div>
+            <div class="c-main">
+                <div class="o-section">
+                    <div class="c-welcome">
+                        <h2 class="c-welcome__title">Welkom,</h2>
+                        <p class="js-name c-welcome__name">username</p>
+                    </div>
+                </div>
+                <div class="o-section">
+                    <div class="o-row-md c-scoreboard">
+                        <div class="o-flex o-flex__justify-content--space-between o-flex__align-items--center">
+                            <h3>
+                                Scoreboard
+                            </h3>
+                            <select class="js-dropdown c-input-bubble c-input-bubble--select" name="filter" id="filter">
+                                <option value="0">Dag</option>
+                                <option value="7" selected>Week</option>
+                                <option value="31">Maand</option>
+                                <option value="365">Jaar</option>
+                                <option value="">All time</option>
+                            </select>
+                        </div>
+                        <div class="js-table c-table">
+                            <div class="c-table-row js-score">
+                                <div class="c-table__score">321</div>
+                                <div class="c-table__name">Ewoud de Preester</div>
+                                <div class="c-table__date">12/01/2021</div>
+                                <div class="c-table__rank"><i class="fas fa-medal" style="color:rgb(225, 180, 34)"></i>
+                                </div>
+                            </div>
+                            <div class="c-table-row js-score">
+                                <div class="c-table__score">321</div>
+                                <div class="c-table__name"> Ewoud de Preester</div>
+                                <div class="c-table__date">12/01/2021</div>
+                                <div class="c-table__rank"><i class="fas fa-medal" style="color:rgb(177, 178, 181)"></i>
+                                </div>
+                            </div>
+                            <div class="c-table-row js-score">
+                                <div class="c-table__score">321</div>
+                                <div class="c-table__name">Ewoud de Preester</div>
+                                <div class="c-table__date">12/01/2021</div>
+                                <div class="c-table__rank"><i class="fas fa-medal" style="color:rgb(126, 82, 28)"></i>
+                                </div>
+                            </div>
+                            <!-- <div class="c-table-row js-score">
+                                <div class="c-table__score">321</div>
+                                <div class="c-table__name">Ewoud de Preester</div>
+                                <div class="c-table__date">12/01/2021</div>
+                                <div class="c-table__rank"><i class="fas fa-medal" style="color:rgb(126, 82, 28)"></i>
+                                </div>
+                            </div>
+                            <div class="c-table-row js-score">
+                                <div class="c-table__score">321</div>
+                                <div class="c-table__name">Ewoud de Preester</div>
+                                <div class="c-table__date">12/01/2021</div>
+                                <div class="c-table__rank"><i class="fas fa-medal" style="color:rgb(126, 82, 28)"></i>
+                                </div>
+                            </div>
+                            <div class="c-table-row js-score">
+                                <div class="c-table__score">321</div>
+                                <div class="c-table__name">Ewoud de Preester</div>
+                                <div class="c-table__date">12/01/2021</div>
+                                <div class="c-table__rank"><i class="fas fa-medal" style="color:rgb(126, 82, 28)"></i>
+                                </div>
+                            </div>
+                            <div class="c-table-row js-score">
+                                <div class="c-table__score">321</div>
+                                <div class="c-table__name">Ewoud de Preester</div>
+                                <div class="c-table__date">12/01/2021</div>
+                                <div class="c-table__rank"><i class="fas fa-medal" style="color:rgb(126, 82, 28)"></i>
+                                </div>
+                            </div> -->
+                        </div>
+                        <div class="c-table-controls"> 
+                            <i class="fas fa-minus-circle js-scores-less"></i> Toon meer
+                            <i class="fas fa-plus-circle js-scores-more"></i>
+                        </div>
+                        <!-- <script>
+                            let list_scores = document.querySelectorAll(".js-score");
+                            console.log(list_scores);
+                            let scoresLessBtn = document.querySelector(".js-scores-less");
+                            let scoresMoreBtn = document.querySelector(".js-scores-more");
+                            let maxScores = 5;
+                            let showScoreboard = () => {
+
+                                let counterScores = 0;
+                                for (let score of list_scores) {
+                                    console.log(score.index);
+                                    score.style.display = `none`;
+                                    if (counterScores < maxScores) {
+                                        score.style.display = `flex`;
+                                    }
+                                    counterScores++;
+                                }
+                            }
+
+                            showScoreboard();
+
+                            scoresLessBtn.addEventListener('click', () => {
+                                if (maxScores > 0) maxScores -= 5;
+
+                                showScoreboard();
+                            });
+
+                            scoresMoreBtn.addEventListener('click', () => {
+
+                                if (maxScores < list_scores.length) maxScores += 5;
+                                showScoreboard();
+                            });
+
+
+                        </script> -->
+                        <div class="o-row-md c-filter">
+                            <div
+                                class="c-filter__item o-flex o-flex__justify-content--space-between o-flex__align-items--center">
+                                <h3>Filteren</h3>
+                                <label class="c-toggle">
+                                    <input type="checkbox">
+                                    <span class="c-toggle__switch js-filter"></span>
+                                </label>
+                            </div>
+
+                            <div class="o-row-sm js-filter-area">
+                                <div
+                                    class="c-filter__item o-flex o-flex__justify-content--space-between o-flex__align-items--center">
+                                    <p>
+                                        Eigen Scores
+                                    </p>
+                                    <label class="c-toggle">
+                                        <input type="checkbox">
+                                        <span class="c-toggle__switch js-toggle"></span>
+                                    </label>
+                                </div>
+                                <div
+                                    class="c-filter__item o-flex o-flex__justify-content--space-between o-flex__align-items--center">
+                                    <p>
+                                        Difficulty
+                                    </p>
+                                    <select class="js-input-difficulty c-input-bubble c-input-bubble--select" name="
+                                    filter_difficulty" id="filter_difficulty">
+                                        <option value="Easy">Easy</option>
+                                        <option value="Medium" selected>Medium</option>
+                                        <option value="Hard">Hard</option>
+                                    </select>
+                                </div>
+                                <div
+                                    class="c-filter__item o-flex o-flex__justify-content--space-between o-flex__align-items--center">
+                                    <p>
+                                        Tijd
+                                    </p>
+                                    <select class="js-input-times c-input-bubble c-input-bubble--select" name="
+                                    filter_time" id="filter_time">
+                                        <option value="180" selected>3 min</option>
+                                        <option value="300">5 min</option>
+                                        <option value="450">7,5 min</option>
+                                        <option value="600">10 min</option>
+                                    </select>
+                                </div>
+                                <div
+                                    class="c-filter__item o-flex o-flex__justify-content--space-between o-flex__align-items--center">
+                                    <p>
+                                        Tussen datum
+                                    </p>
+                                    <div class="o-flex">
+                                    </div>
+                                </div>
+                                <div class="o-row-sm o-grid o-grid__columns-2 o-grid__column-gap--md">
+                                    <p>Van</p>
+                                    <p>Tot</p>
+                                </div>
+                                <div class="o-row-sm o-grid o-grid__columns-2 o-grid__column-gap--md">
+
+                                    <input class="js-date_start c-input-bubble c-input-bubble--date" type="date"
+                                        value="06/01/2021" id="flatpickr" />
+                                    <input class="js-date_end c-input-bubble c-input-bubble--date" type="date"
+                                        value="21/01/2021" id="flatpickr" />
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="c-controls">
+                <div class="o-grid o-grid__columns-2 o-grid__column-gap--md">
+                    <button onclick="location.href='/logout'" class="js-logout c-button">Uitloggen</button>
+                    <button onclick="location.href='/play'" class="js-start c-button c-button--primary">Start</button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- <div class="c-popup js-popup">
+        <div class="c-popup-invisibleClose" onclick="document.querySelector('.js-popup').style.display='none'">
+        </div>
+
+        <div class="o-container">
+            <div class="c-popup-window">
+                <h2 class="c-popup-window__title">
+                    [ <span class="u-color-green">L</span><span class="u-color-orange">E</span><span
+                        class="u-color-red">D</span> ] the battle begin!
+                </h2>
+
+                <div class="o-row-md">
+                    <p>
+                        Het spel werkt als volgt, je start het spel en er licht een willekeurig poortje op. Binnen
+                        de
+                        <b>3 minuten</b> moet je zoveel mogelijk punten verzamelen door door poortjes te fietsen.
+                        <br><br>
+                        Indien nodig kan je de <b>duurtijd</b> en <b>moeilijkheid</b> aanpassen van het spel, voor het spel start. 
+                    </p>
+                </div>
+                <div class="o-row-md o-grid o-grid__columns-3 o-grid__column-gap--md">
+                    <div class="c-field c-field--green">
+                        +5
+                    </div>
+                    <div class="c-field c-field--orange">
+                        +2
+                    </div>
+                    <div class="c-field c-field--red">
+                        +0
+                    </div>
+                </div>
+
+                <div class="o-row-lg o-grid">
+                    <button class="c-button c-button--primary js-popup-close">Sluit popup</button>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div> -->
+    <!-- <div class="c-popup js-popup">
+        <div class="c-popup-invisibleClose" onclick="document.querySelector('.js-popup').style.display='none'">
+        </div>
+
+        <div class="o-container">
+            <div class="c-popup-window">
+                <h2 class="c-popup-window__title">
+                    Spel voltooid! 🏁
+                </h2>
+
+                <div class="o-row-md">
+                    <h1><span style="font-size:3rem">231</span> punten</h1>
+                    <p>
+                        Klik <b>hier</b> om je gamelogs te herbekijken.
+                    </p>
+                </div>
+
+                <div class="o-row-md o-grid">
+                    <button class="c-button c-button--primary c-button--flat js-popup-close">Score opslaan</button>
+                </div>
+                <div class="o-row-md o-grid o-grid__columns-2 o-grid__column-gap--md">
+                    <button class="c-button">Sluit</button>
+                    <button class="c-button c-button--primary">Opnieuw</button>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <script>var example = flatpickr('#flatpickr');</script>
+</body>
+
+</html>
