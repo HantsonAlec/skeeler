@@ -148,6 +148,6 @@ def on_index(value):
         
 if __name__ == "__main__":
     try:
-        socketio.run(app,debug=True,host='0.0.0.0',use_reloader=False, port=env.get('PORT', 3000))
+        socketio.run(app,debug=True,host='0.0.0.0',use_reloader=False, port=env.get('PORT', 8000))
     finally:
         pass
